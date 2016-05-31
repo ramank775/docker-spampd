@@ -21,4 +21,4 @@ ADD bin/run.sh /app/bin/run.sh
 RUN chmod 0755 /app/bin/run.sh
 
 ENTRYPOINT ["/app/bin/run.sh"]
-CMD ["/usr/bin/spampd", "--nodetach", "--user=spampd", "--group=spampd", "--host=0.0.0.0:10025", "--relayhost=${SPAMPD_RELAYHOST}", "--sef", "--tagall"]
+CMD ["/usr/sbin/spampd", "--nodetach", "--user=spampd", "--group=spampd", "--host=0.0.0.0:10025", "--relayhost=${SPAMPD_RELAYHOST}", "--sef", "--tagall"]
