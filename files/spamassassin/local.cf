@@ -53,7 +53,7 @@ bayes_ignore_header X-Spam-Status
 
 
 #   Set bayes file path and permissions
-bayes_path /var/cache/spampd/.spamassassin/bayes
+bayes_path /var/cache/spampd/bayes
 bayes_file_mode 0777
 
 

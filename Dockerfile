@@ -12,7 +12,7 @@ RUN apt-get -qq update && \
                                                supervisor && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-VOLUME ["/var/cache/spampd/.spamassassin"]
+VOLUME ["/var/cache/spampd"]
 
 ADD files/spamassassin/local.cf /etc/spamassassin/local.cf
 ADD files/rsyslog/rsyslog.conf /etc/rsyslog.conf
