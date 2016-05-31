@@ -7,12 +7,16 @@ ENV SPAMPD_RELAYHOST=smtp:10026
 RUN apt-get -qq update && \
     apt-get install -y --no-install-recommends spampd \
                                                pyzor \
-                                               razor && \
+                                               razor \
+                                               rsyslog \
+                                               supervisor && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 VOLUME ["/var/cache/spampd/.spamassassin"]
 
 ADD files/spamassassin/local.cf /etc/spamassassin/local.cf
+ADD files/rsyslog/rsyslog.conf /etc/rsyslog.conf
+ADD files/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 
 EXPOSE 10025
 
@@ -21,4 +25,4 @@ ADD bin/run.sh /app/bin/run.sh
 RUN chmod 0755 /app/bin/run.sh
 
 ENTRYPOINT ["/app/bin/run.sh"]
-CMD ["/usr/sbin/spampd", "--nodetach", "--user=spampd", "--group=spampd", "--host=0.0.0.0:10025", "--relayhost=${SPAMPD_RELAYHOST}", "--sef", "--tagall"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
