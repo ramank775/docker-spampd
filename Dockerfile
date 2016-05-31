@@ -3,6 +3,7 @@ FROM chambana/base:latest
 MAINTAINER Josh King <jking@chambana.net>
 
 ENV SPAMPD_RELAYHOST=smtp:10026
+ENV SPAMPD_HOST=0.0.0.0:10025
 
 RUN apt-get -qq update && \
     apt-get install -y --no-install-recommends spampd \
