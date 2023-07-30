@@ -16,12 +16,12 @@
 #   modifying the original message (0: off, 2: use text/plain instead)
 #
 # report_safe 1
-
+report_safe 0
 
 #   Set which networks or hosts are considered 'trusted' by your mail
 #   server (i.e. not spammers)
 #
-trusted_networks 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
+# trusted_networks 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
 
 
 #   Set file-locking method (flock is not safe over NFS, but is faster)
@@ -54,7 +54,7 @@ bayes_ignore_header X-Spam-Status
 
 #   Set bayes file path and permissions
 bayes_path /var/cache/spampd/bayes
-bayes_file_mode 0777
+bayes_file_mode 0666
 
 
 #   Some shortcircuiting, if the plugin is enabled
@@ -87,3 +87,9 @@ ifplugin Mail::SpamAssassin::Plugin::Shortcircuit
 # shortcircuit BAYES_00                ham
 
 endif # Mail::SpamAssassin::Plugin::Shortcircuit
+
+
+pyzor_options="--homedir /etc/spamassassin/pyzor"
+
+"add_header all Report"=_REPORT_
+"add_header all Score"=_SCORE_
